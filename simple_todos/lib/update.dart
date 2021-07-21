@@ -3,6 +3,8 @@ import 'package:http/http.dart';
 import './urls.dart';
 
 class UpdatePage extends StatefulWidget {
+  static const routeName = '/update';
+
   final Client client;
   final int id;
   final String body;
