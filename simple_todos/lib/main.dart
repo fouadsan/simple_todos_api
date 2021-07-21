@@ -12,13 +12,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.indigo,
         accentColor: Colors.redAccent,
-        // fontFamily: 'Poppins',
+        canvasColor: Color.fromRGBO(243, 243, 251, 1),
+        fontFamily: 'Poppins',
         textTheme: TextTheme(
           bodyText1: TextStyle(
-            fontSize: 14.0,
-            color: Colors.red,
+            fontSize: 16.0,
+            color: Color.fromRGBO(43, 61, 66, 1),
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

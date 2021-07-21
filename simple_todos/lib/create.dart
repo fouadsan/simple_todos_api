@@ -30,11 +30,15 @@ class _CreatePageState extends State<CreatePage> {
   InputDecoration _buildInputDecoration(String hint, String iconPath) {
     return InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(252, 252, 252, 1))),
+            borderSide: BorderSide(
+          color: Colors.indigo,
+        )),
         hintText: hint,
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(151, 151, 151, 1))),
-        hintStyle: TextStyle(color: Color.fromRGBO(252, 252, 252, 1)),
+            borderSide: BorderSide(
+          color: Color.fromRGBO(180, 180, 186, 0.4),
+        )),
+        hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.3)),
         icon: iconPath != ''
             ? Image.asset(
                 iconPath,
@@ -42,16 +46,17 @@ class _CreatePageState extends State<CreatePage> {
                 fit: BoxFit.contain,
               )
             : null,
-        errorStyle: TextStyle(color: Color.fromRGBO(248, 218, 87, 1)),
-        errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(248, 218, 87, 1))),
-        focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(248, 218, 87, 1))));
+        errorStyle: TextStyle(color: Colors.red),
+        errorBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)));
   }
 
   Widget _buildTodo() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: TextFormField(
         controller: _controller,
         validator: (value) {
@@ -71,8 +76,7 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: MediaQuery.of(context).viewInsets,
+    return SingleChildScrollView(
       child: Form(
         key: _formKey,
         child: Column(
@@ -82,18 +86,29 @@ class _CreatePageState extends State<CreatePage> {
             SizedBox(
               height: 20.0,
             ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  await widget.client
-                      .post(createUrl, body: {'body': _controller.text});
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.indigo,
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    await widget.client
+                        .post(createUrl, body: {'body': _controller.text});
 
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Todo has been created')));
-                }
-              },
-              child: Text("Submit"),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Todo has been created')));
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(
+                  "Submit",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               height: 20.0,
